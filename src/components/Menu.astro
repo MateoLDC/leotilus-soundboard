@@ -1,10 +1,10 @@
 ---
 const pages = [
     { name: "Acceuil", path: "/" },
-    { name: "Jules Verne", path: "/jules_verne" },
-    { name: "Georges Méliès", path: "/georges_melies" },
-    { name: "Mami Wata", path: "/mami_wata" },
-    { name: "Ollivander", path: "/ollivander" },
+    { name: "Jules Verne", path: "/leotilus-soundboard/jules_verne" },
+    { name: "Georges Méliès", path: "/leotilus-soundboard/georges_melies" },
+    { name: "Mami Wata", path: "/leotilus-soundboard/mami_wata" },
+    { name: "Ollivander", path: "/leotilus-soundboard/ollivander" },
 ];
 
 const currentPage = pages.find(page => Astro.url.pathname === page.path) || pages[0];
