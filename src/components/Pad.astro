@@ -1,0 +1,66 @@
+---
+interface Props {
+    name: string;
+    sound: string;
+    color: string;
+}
+
+const { name, sound, color } = Astro.props;
+---
+
+<div class="container">
+    <button class="pad" data-sound={sound} style={`background-color: ${color}`}></button>
+    <h5>{name}</h5>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    button {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 1.5rem;
+        border: none;
+        opacity: 0.5;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .playing {
+        opacity: 1;
+    }
+
+    h5 {
+        color: var(--text-color);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const padButtons = document.querySelectorAll('.pad');
+    padButtons.forEach((button) => {
+        const soundPath = button.getAttribute('data-sound');
+
+        if (soundPath) {
+            const audio = new Audio(soundPath);
+            
+            button.addEventListener("click", () => {
+                if (audio.paused){
+                    audio.play();
+                    button.style.opacity = "1";
+                }else {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    button.style.opacity = "0.5";
+                }
+                audio.addEventListener("ended", () => {
+                    button.style.opacity= "0.5";
+                });
+            });
+        }
+    });
+  });
+</script>

@@ -1,0 +1,95 @@
+---
+const pages = [
+    { name: "Acceuil", path: "/" },
+    { name: "Jules Verne", path: "/jules_verne" },
+    { name: "Georges Méliès", path: "/georges_melies" },
+    { name: "Mami Wata", path: "/mami_wata" },
+    { name: "Ollivander", path: "/ollivander" },
+];
+
+const currentPage = pages.find(page => Astro.url.pathname === page.path) || pages[0];
+const otherPages = pages.filter(page => page.path !== currentPage.path);
+---
+
+<div class="dropdown">
+    <button class="dropbtn" id="dropdown-btn">{currentPage.name} ⏷</button>
+    <div class="dropdown-content" id="dropdown-menu">
+        {otherPages.map((page) => (
+            <a href={page.path}>{page.name}</a>
+        ))}
+    </div>
+</div>
+
+<style>
+    .dropdown {
+        position: absolute;
+        top: 0;
+        margin-top: 5rem;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+    }
+
+    .dropbtn {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        border: none;
+        cursor: pointer;
+        border: 2px solid var(--text-color);
+        border-radius: 1rem;
+    }
+
+    .dropbtn:hover, .dropbtn:focus{
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        margin-top: 3.5rem;
+        background-color: white;
+        min-width: 160px;
+        box-shadow: var(--shadow);
+        border-radius: 1rem;
+        z-index: 10;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        border-radius: 1rem;
+        color: var(--text-color);
+        background-color: var(--secondary-color);
+    }
+
+    .show {
+        display: block;
+    }
+</style>
+
+<script>
+    const dropdownBtn = document.getElementById("dropdown-btn");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+
+    if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener("click", (event: MouseEvent) => {
+            event.stopPropagation();
+            dropdownMenu.classList.toggle("show");
+        });
+
+        window.addEventListener("click", (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (!target.matches('.dropbtn')) {
+                dropdownMenu.classList.remove("show");
+            }
+        });
+    }
+</script>

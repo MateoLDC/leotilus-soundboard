@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+    /* Couleurs */
+    --primary-color: #1c1c1c;
+    --secondary-color: white;
+    --bg-color: #1c1c1c;
+    --text-color: white;
+    --text-footer: rgb(87, 87, 87);
+
+    /* Couleurs des pads actifs */
+    --pad1: red;
+    --pad2: coral;
+    --pad3: yellow;
+    --pad4: mediumseagreen;
+    --pad5: cadetblue;
+    --pad6: cornflowerblue;
+    --pad7: blueviolet;
+    --pad8: magenta;
+
+    /* Shadow */
+    --shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --shadow-hover: rgba(0, 0, 0, 0.35) 0px 10px 30px;
+
+    /* font */
+    --Exo2: "Exo 2", serif;
+}
