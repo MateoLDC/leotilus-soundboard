@@ -7,7 +7,12 @@ const pages = [
     { name: "Ollivander", path: "/leotilus-soundboard/ollivander" },
 ];
 
-const currentPage = pages.find(page => page.path === Astro.url.pathname) || pages[0];
+
+const pathname = Astro.url.pathname.endsWith("/") 
+    ? Astro.url.pathname 
+    : Astro.url.pathname + "/";
+
+const currentPage = pages.find(page => pathname === page.path) || pages[0];
 const otherPages = pages.filter(page => page.path !== currentPage.path);
 ---
 
