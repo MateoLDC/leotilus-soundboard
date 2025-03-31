@@ -1,21 +1,8 @@
 ---
+import Chrono from "../components/Chrono.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-    <div class="pad-grid">
-        <span>Pas de sons ici !</span>
-    </div>
+    <Chrono />
 </Layout>
-
-<style>
-    .pad-grid{
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.25rem 3rem;
-    }
-
-    span{
-        color: var(--text-color);
-    }
-</style>

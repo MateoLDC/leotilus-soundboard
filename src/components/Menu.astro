@@ -1,18 +1,19 @@
 ---
 const pages = [
-    { name: "Acceuil", path: "/leotilus-soundboard/" },
+    { name: "Accueil", path: "/leotilus-soundboard/" },
     { name: "Jules Verne", path: "/leotilus-soundboard/jules_verne" },
     { name: "Georges Méliès", path: "/leotilus-soundboard/georges_melies" },
     { name: "Mami Wata", path: "/leotilus-soundboard/mami_wata" },
     { name: "Ollivander", path: "/leotilus-soundboard/ollivander" },
 ];
 
+// Vérifie l'URL actuelle
+const currentPath = Astro.url.pathname;
 
-const pathname = Astro.url.pathname.endsWith("/") 
-    ? Astro.url.pathname 
-    : Astro.url.pathname + "/";
+// Sélectionne la page correspondante
+const currentPage = pages.find(page => currentPath.startsWith(page.path)) || pages[0];
 
-const currentPage = pages.find(page => pathname === page.path) || pages[0];
+// Liste des autres pages
 const otherPages = pages.filter(page => page.path !== currentPage.path);
 ---
 
@@ -55,7 +56,7 @@ const otherPages = pages.filter(page => page.path !== currentPage.path);
         display: none;
         position: absolute;
         margin-top: 3.5rem;
-        background-color: white;
+        background-color: var(--secondary-color);
         min-width: 160px;
         box-shadow: var(--shadow);
         border-radius: 1rem;
@@ -81,20 +82,19 @@ const otherPages = pages.filter(page => page.path !== currentPage.path);
 </style>
 
 <script>
-    const dropdownBtn = document.getElementById("dropdown-btn");
-    const dropdownMenu = document.getElementById("dropdown-menu");
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownBtn = document.getElementById("dropdown-btn");
+        const dropdownMenu = document.getElementById("dropdown-menu");
 
-    if (dropdownBtn && dropdownMenu) {
-        dropdownBtn.addEventListener("click", (event: MouseEvent) => {
+        dropdownBtn.addEventListener("click", function (event) {
             event.stopPropagation();
             dropdownMenu.classList.toggle("show");
         });
 
-        window.addEventListener("click", (event: MouseEvent) => {
-            const target = event.target as HTMLElement;
-            if (!target.matches('.dropbtn')) {
+        window.addEventListener("click", function (event) {
+            if (!dropdownMenu.contains(event.target) && !dropdownBtn.contains(event.target)) {
                 dropdownMenu.classList.remove("show");
             }
         });
-    }
+    });
 </script>
