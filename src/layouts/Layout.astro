@@ -1,14 +1,23 @@
+---
+import Header from "../components/Header.astro"
+import Menu from "../components/Menu.astro"
+import Footer from "../components/Footer.astro"
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/leotilus-soundboard/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+		<!-- <meta name="generator" content={Astro.generator} /> -->
 		<title>Leotilus Soundboard</title>
 	</head>
 	<body>
+		<Header />
+		<Menu />
 		<slot />
+		<Footer />
 	</body>
 </html>
 
