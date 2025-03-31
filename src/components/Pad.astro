@@ -9,8 +9,11 @@ const { name, sound, color } = Astro.props;
 ---
 
 <div class="container">
-    <button class="pad" data-sound={sound} style={`background-color: ${color}`}></button>
+    <button class="pad" data-sound={sound} style={`background-color: ${color}`}>
+        <span class="current-time">--:--:--</span>
+    </button>
     <h5>{name}</h5>
+    <span class="total-duration">--:--:--</span>
 </div>
 
 <style>
@@ -20,13 +23,19 @@ const { name, sound, color } = Astro.props;
         align-items: center;
     }
     
-    button {
+    .pad {
         width: 7rem;
         height: 7rem;
         border-radius: 1.5rem;
         border: none;
         opacity: 0.5;
         transition: opacity 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        color: white;
+        text-align: center;
     }
 
     .playing {
@@ -35,32 +44,73 @@ const { name, sound, color } = Astro.props;
 
     h5 {
         color: var(--text-color);
+        font-size: 1rem;
+    }
+
+    .current-time {
+        font-family: var(--Exo2);
+    }
+
+    .total-duration {
+        color: var(--text-color);
     }
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const padButtons = document.querySelectorAll('.pad');
-    padButtons.forEach((button) => {
-        const soundPath = button.getAttribute('data-sound');
+    document.addEventListener("DOMContentLoaded", function () {
+        const padButtons = document.querySelectorAll('.pad');
 
-        if (soundPath) {
-            const audio = new Audio(soundPath);
-            
-            button.addEventListener("click", () => {
-                if (audio.paused){
-                    audio.play();
-                    button.style.opacity = "1";
-                }else {
-                    audio.pause();
-                    audio.currentTime = 0;
-                    button.style.opacity = "0.5";
-                }
-                audio.addEventListener("ended", () => {
-                    button.style.opacity= "0.5";
+        padButtons.forEach((button) => {
+            const soundPath = button.getAttribute('data-sound');
+            const currentTimeDisplay = button.querySelector('.current-time');
+            const totalDurationDisplay = button.closest(".container").querySelector('.total-duration');
+
+            if (soundPath && currentTimeDisplay && totalDurationDisplay) {
+                const audio = new Audio(soundPath);
+
+                // Charger la durée totale dès que l'audio est prêt
+                audio.addEventListener("loadedmetadata", () => {
+                    const duration = formatTime(audio.duration);
+                    totalDurationDisplay.textContent = duration;
+                    totalDurationDisplay.dataset.duration = duration;
                 });
-            });
+
+                button.addEventListener("click", () => {
+                    if (audio.paused) {
+                        audio.play();
+                        button.style.opacity = "1";
+                        updateCurrentTime(audio, currentTimeDisplay);
+                    } else {
+                        audio.pause();
+                        audio.currentTime = 0;
+                        button.style.opacity = "0.5";
+                        currentTimeDisplay.textContent = "--:--:--"; // Réinitialise le temps affiché
+                    }
+
+                    audio.addEventListener("ended", () => {
+                        button.style.opacity = "0.5";
+                        currentTimeDisplay.textContent = "--:--:--";
+                    });
+                });
+            }
+        });
+
+        function formatTime(seconds) {
+            const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            const s = String(Math.floor(seconds % 60)).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
+
+        function updateCurrentTime(audio, currentTimeDisplay) {
+            const interval = setInterval(() => {
+                if (!audio.paused) {
+                    const currentTime = formatTime(audio.currentTime);
+                    currentTimeDisplay.textContent = currentTime;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 500);
         }
     });
-  });
 </script>
