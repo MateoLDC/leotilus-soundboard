@@ -12,6 +12,9 @@ const currentPath = Astro.url.pathname;
 const currentPage = pages.find(page => currentPath === page.path) || pages.find(page => currentPath.startsWith(page.path)) || pages[0];
 
 const otherPages = pages.filter(page => page.path !== currentPage.path);
+
+console.log("Current Path : ", currentPath);
+console.log("Current Page : ", currentPage);
 ---
 
 <div class="dropdown">

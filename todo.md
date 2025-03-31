@@ -1,10 +1,10 @@
 ## A faire
 
--   [ ] Modifier le composant Menu pour résoudre le problème de bouton déroulant qui n'affiche pas la page dans laquelle l'utilisateur se trouve.
+-   [ ] La font affichée n'est pas la bonne
 
 ## En cours
 
--   [ ] La font affichée n'est pas la bonne
+-   [ ] Modifier le composant Menu pour résoudre le problème de bouton déroulant qui n'affiche pas la page dans laquelle l'utilisateur se trouve.
 
 ## Terminé
 
