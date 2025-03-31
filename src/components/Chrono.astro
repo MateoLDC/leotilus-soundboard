@@ -37,12 +37,24 @@
         border: 2px solid var(--pad5);
     }
 
+    #start-btn:hover {
+        background-color: var(--pad5);
+    }
+
     #stop-btn {
         border: 2px solid var(--pad2);
     }
 
+    #stop-btn:hover {
+        background-color: var(--pad2);
+    }
+
     #reset-btn {
         border: 2px solid var(--pad6);
+    }
+
+    #reset-btn:hover {
+        background-color: var(--pad6);
     }
 </style>
 
@@ -91,7 +103,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         updateDisplay();
     });
-    
+
     document.addEventListener("DOMContentLoaded", function () {
         const startBtn = document.getElementById("start-btn");
         const stopBtn = document.getElementById("stop-btn");
