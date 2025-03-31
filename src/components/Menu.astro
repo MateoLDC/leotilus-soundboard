@@ -7,13 +7,10 @@ const pages = [
     { name: "Ollivander", path: "/leotilus-soundboard/ollivander" },
 ];
 
-// Vérifie l'URL actuelle
 const currentPath = Astro.url.pathname;
 
-// Sélectionne la page correspondante
-const currentPage = pages.find(page => currentPath.startsWith(page.path)) || pages[0];
+const currentPage = pages.find(page => currentPath === page.path) || pages.find(page => currentPath.startsWith(page.path)) || pages[0];
 
-// Liste des autres pages
 const otherPages = pages.filter(page => page.path !== currentPage.path);
 ---
 
