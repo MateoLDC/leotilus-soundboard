@@ -1,8 +1,21 @@
 ---
 import Chrono from "../components/Chrono.astro";
+import Pad from "../components/Pad.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
     <Chrono />
+    <div class="pad-grid">
+        <Pad name="Bateau" sound="/leotilus-soundboard/Sons/son-bateau.mp3" color="var(--pad6)"/>
+    </div>
 </Layout>
+
+<style>
+    .pad-grid{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 3rem;
+        margin-top: 3rem;
+    }
+</style>
