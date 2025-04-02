@@ -88,6 +88,7 @@ const pages = [
         const currentPage = pages.find(page => currentPath === page.path) || pages.find(page => currentPath.startsWith(page.path)) || pages[0];
 
         console.log("Current Page (Client):", currentPage);
+        console.log("Pages:", pages);
 
         const dropdownBtn = document.getElementById("dropdown-btn");
         dropdownBtn.textContent = `${currentPage.name} ⏷`;
