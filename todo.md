@@ -1,12 +1,14 @@
 ## A faire
 
--   [ ] La font affichée n'est pas la bonne
-
 ## En cours
 
--   [ ] Modifier le composant Menu pour résoudre le problème de bouton déroulant qui n'affiche pas la page dans laquelle l'utilisateur se trouve.
-
 ## Terminé
+
+-   [x] Ajouter un pad "Bateau" dans la page Jules Verne
+
+-   [x] La font affichée n'est pas la bonne
+
+-   [x] Modifier le composant Menu pour résoudre le problème de bouton déroulant qui n'affiche pas la page dans laquelle l'utilisateur se trouve.
 
 -   [x] Modifier le layout pour y intégrer les composants Header, Footer et Menu.
 
