@@ -6,21 +6,12 @@ const pages = [
     { name: "Mami Wata", path: "/leotilus-soundboard/mami_wata" },
     { name: "Ollivander", path: "/leotilus-soundboard/ollivander" },
 ];
-
-const currentPath = Astro.url.pathname;
-
-const currentPage = pages.find(page => currentPath === page.path) || pages.find(page => currentPath.startsWith(page.path)) || pages[0];
-
-const otherPages = pages.filter(page => page.path !== currentPage.path);
-
-console.log("Current Path : ", currentPath);
-console.log("Current Page : ", currentPage);
 ---
 
 <div class="dropdown">
-    <button class="dropbtn" id="dropdown-btn">{currentPage.name} ⏷</button>
+    <button class="dropbtn" id="dropdown-btn">Chargement... ⏷</button>
     <div class="dropdown-content" id="dropdown-menu">
-        {otherPages.map((page) => (
+        {pages.map((page) => (
             <a href={page.path}>{page.name}</a>
         ))}
     </div>
@@ -83,7 +74,24 @@ console.log("Current Page : ", currentPage);
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const pages = [
+            { name: "Accueil", path: "/leotilus-soundboard/" },
+            { name: "Jules Verne", path: "/leotilus-soundboard/jules_verne" },
+            { name: "Georges Méliès", path: "/leotilus-soundboard/georges_melies" },
+            { name: "Mami Wata", path: "/leotilus-soundboard/mami_wata" },
+            { name: "Ollivander", path: "/leotilus-soundboard/ollivander" },
+        ];
+
+        const currentPath = window.location.pathname;
+        console.log("Current Path (Client):", currentPath);
+
+        const currentPage = pages.find(page => currentPath === page.path) || pages.find(page => currentPath.startsWith(page.path)) || pages[0];
+
+        console.log("Current Page (Client):", currentPage);
+
         const dropdownBtn = document.getElementById("dropdown-btn");
+        dropdownBtn.textContent = `${currentPage.name} ⏷`;
+
         const dropdownMenu = document.getElementById("dropdown-menu");
 
         dropdownBtn.addEventListener("click", function (event) {
