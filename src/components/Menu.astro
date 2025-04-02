@@ -85,7 +85,9 @@ const pages = [
         const currentPath = window.location.pathname;
         console.log("Current Path (Client):", currentPath);
 
-        const currentPage = pages.find(page => currentPath === page.path) || pages.find(page => currentPath.startsWith(page.path)) || pages[0];
+        const normalizedPath = currentPath.endsWith("/") ? currentPath.slice(0, -1) : currentPath;
+
+        const currentPage = pages.find(page => normalizedPath === page.path) || pages.find(page => normalizedPath.startsWith(page.path)) || pages[0];
 
         console.log("Current Page (Client):", currentPage);
         console.log("Pages:", pages);
